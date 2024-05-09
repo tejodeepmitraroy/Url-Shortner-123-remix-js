@@ -15,16 +15,19 @@
     "@nextui-org/react": "^2.3.6",
     "@nextui-org/system": "^2.1.2",
     "@nextui-org/theme": "^2.2.3",
+    "@prisma/client": "^5.13.0",
     "@remix-run/node": "^2.9.1",
     "@remix-run/react": "^2.9.1",
     "@remix-run/serve": "^2.9.1",
     "axios": "^1.6.8",
     "framer-motion": "^11.1.9",
     "isbot": "^4.1.0",
+    "nanoid": "^5.0.7",
     "prisma": "^5.13.0",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.9.1",

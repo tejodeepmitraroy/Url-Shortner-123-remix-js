@@ -3,9 +3,9 @@ import { useState } from "react";
 // import Background from "../components/Background";
 import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Button, Divider, Input } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import Tables from "~/components/Tables";
-import Footer from "~/components/Footer";
+import { useLocation } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,25 +18,30 @@ export default function Index() {
   const [inputValue, setInputValue] = useState<string>("");
   const [shortenLink, setShortenLink] = useState<string>("dwadwadwadwa");
   const [copied, setCopied] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  // const [error, setError] = useState(false);
+
+  const location = useLocation();
+
+  console.log(location.hash);
 
   const handleSubmit = async () => {
-    console.log("click");
+    console.log(inputValue);
+
     if (inputValue.length) {
       try {
-        setLoading(true);
-        const { data } = await axios(
-          `https://api.shrtco.de/v2/shorten?url=${inputValue}`
-        );
+        setisLoading(true);
+        const { data } = await axios.post(`http://localhost:5173/api/url`, {
+          url: inputValue,
+        });
 
-        console.log(data.result.full_short_link);
+        console.log(data);
 
         setShortenLink(data.result.full_short_link);
-        setLoading(false);
+        setisLoading(false);
       } catch (err) {
-        setError(true);
-        setLoading(false);
+        // setError(true);
+        setisLoading(false);
       }
     }
   };
@@ -59,7 +64,7 @@ export default function Index() {
           />
           <Button
             onClick={handleSubmit}
-            // isLoading
+            isLoading={isLoading}
             color="primary"
             className="w-full text-lg font-semibold"
             size="lg"
@@ -73,9 +78,7 @@ export default function Index() {
 
         <div className=" w-full  rounded-lg flex items-center justify-between">
           <div className="w-[80%] h-full border-2 border-[#f7c00ae8]  rounded-3xl  m-0">
-            <p className="p-2" >
-              {shortenLink}
-            </p>
+            <p className="p-2">{shortenLink}</p>
           </div>
           <CopyToClipboard text={shortenLink} onCopy={() => setCopied(true)}>
             <Button
