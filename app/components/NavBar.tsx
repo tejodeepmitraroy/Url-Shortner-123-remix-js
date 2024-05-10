@@ -15,7 +15,7 @@ const NavBar = () => {
       className=" flex "
     >
       <NavbarBrand>
-        <span className="text-2xl  font-dynaPuff text-[#f7c00ae8]">
+        <span className="text-4xl  font-dynaPuff text-[#f7c00ae8]">
           UrlShortner 123
         </span>
       </NavbarBrand>
